@@ -8,6 +8,7 @@ export class JungleController {
 
   constructor() {
     console.log('JungleController is loaded');
+    AppState.on('jumbles', this.drawJumbleList)
     this.drawJumbleList()
   }
 
