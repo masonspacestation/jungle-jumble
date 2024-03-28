@@ -2,11 +2,24 @@ import { AppState } from "../AppState.js";
 import { Jumble } from "../models/Jungle.js";
 
 class JungleService {
+  gameStart() {
+    AppState.activeJumble.start = new Date()
+    console.log('game started');
+  }
+
+  gameStop() {
+    AppState.activeJumble.stop = new Date()
+    // console.log(, 'ended at', jumbleTitle.stop);
+  }
+
+
   setActiveJumble(jumbleTitle) {
     const foundJumble = AppState.jumbles.find(jumble => jumble.title == jumbleTitle)
     AppState.activeJumble = foundJumble
 
-    console.log(AppState.activeJumble);
+    // console.log(AppState.activeJumble);
+
+
   }
 
 

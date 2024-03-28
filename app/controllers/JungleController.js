@@ -49,10 +49,27 @@ export class JungleController {
 
   setActiveJumble(jumbleTitle) {
     jungleService.setActiveJumble(jumbleTitle)
+    jungleService.gameStart()
+
   }
 
 
+  checkGame() {
 
+    try {
+      event.preventDefault()
+      console.log('checking submission')
+      const gameSubmit = event.target
+      const submitData = getFormData(gameSubmit)
+      console.log('submitted', submitData)
+
+
+      submitData.gameSubmit == AppState.activeJumble.body ? console.log('woop') : console.log('lose');
+
+    } catch {
+      console.error('[SUBMIT BROKEN]');
+    }
+  }
 
 
 

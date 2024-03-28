@@ -14,7 +14,7 @@ export class Jumble {
   get jumbleItemTemplate() {
     return `
   <div class="m-1">
-            <button class="d-inline" onclick="app.JungleController.setActiveJumble('${this.title}')">Start</button>
+            <button class="d-inline" onclick="app.JungleController.setActiveJumble()">Start</button>
             <span class="m-1 p-1">${this.title}</span>
             <span class="m-1 p-1">${this.fastest}</span>
             <span class="m-1 p-1">wpm</span>
@@ -32,8 +32,10 @@ export class Jumble {
 
           <p>${this.body}</p>
 
-          <textarea name="" id="" class="w-75"></textarea>
+          <form onsubmit="app.JungleController.checkGame('${this.title}')">
+          <input type="text" name="gameSubmit" id="gameSubmit" class="w-75"></input>
           <button type="submit">Submit</button>
+          </form>
           </div>
         </div>
     `

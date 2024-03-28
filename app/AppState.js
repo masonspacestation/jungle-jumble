@@ -17,6 +17,9 @@ class ObservableAppState extends EventEmitter {
 
 
 
+  /**
+   * @type {Jumble}
+   */
   activeJumble = null
 
   submittedJumble = null
