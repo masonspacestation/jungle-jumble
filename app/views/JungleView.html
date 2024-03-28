@@ -2,8 +2,8 @@
 
   <h1>Jumbles!</h1>
   <div class="row">
-    <div class="col-6">
-      <div id="jumble-list" class="row justify-content-between align-content-center">
+    <div class="col-6 border border-dark">
+      <div id="jumble-list" class="row justify-content-between align-items-center border border-dark">
         <!-- STUB jumble list items -->
         <!-- <div class="m-1">
           <button class="d-inline">Start</button>
@@ -11,6 +11,17 @@
           <span class="m-1 p-1">timer</span>
           <span class="m-1 p-1">wpm</span>
         </div> -->
+      </div>
+      <div class="row justify-content-between text-center border border-dark">
+        <h3>Create Jumble</h3>
+        <form id="newjumbleform" class="text-start" onsubmit="app.JungleController.createJumble()">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" required minlength="2" maxlength="20">
+          <label for="jumble">Jumble</label>
+          <input type="text" name="jumble" id="jumble" required minlength="2" maxlength="20">
+          <button class="btn btn-outline-warning" type="submit">Create
+            Jumble</button>
+        </form>
       </div>
     </div>
   </div>
