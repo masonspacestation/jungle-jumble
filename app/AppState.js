@@ -10,10 +10,17 @@ class ObservableAppState extends EventEmitter {
     new Jumble({
       title: 'Baby Jumble',
       difficulty: 'easy',
-      body: '',
+      body: 'Fromage stinking bishop brie. Cheesecake cauliflower cheese edam taleggio cheesy feet jarlsberg brie monterey jack.',
       fastest: 35,
     })
   ]
+
+
+
+  activeJumble = null
+
+  submittedJumble = null
+
 }
 
 export const AppState = createObservableProxy(new ObservableAppState())

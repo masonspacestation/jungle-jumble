@@ -14,13 +14,29 @@ export class Jumble {
   get jumbleItemTemplate() {
     return `
   <div class="m-1">
-            <button class="d-inline">Start</button>
+            <button class="d-inline" onclick="app.JungleController.setActiveJumble('${this.title}')">Start</button>
             <span class="m-1 p-1">${this.title}</span>
             <span class="m-1 p-1">${this.fastest}</span>
             <span class="m-1 p-1">wpm</span>
           </div>
   
   `
+  }
+
+  get activeJumbleTemplate() {
+    return `
+    <div class="row justify-content-between">
+        <div class="col-12 m-1">
+          <span class=" my-2 text-start w-50">${this.title}</span>
+          <span class=" my-2 text-end w-50">${this.fastest}</span>
+
+          <p>${this.body}</p>
+
+          <textarea name="" id="" class="w-75"></textarea>
+          <button type="submit">Submit</button>
+          </div>
+        </div>
+    `
   }
 
 

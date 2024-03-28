@@ -9,6 +9,7 @@ export class JungleController {
   constructor() {
     console.log('JungleController is loaded');
     AppState.on('jumbles', this.drawJumbleList)
+    AppState.on('activeJumble', this.drawActiveJumble)
     this.drawJumbleList()
   }
 
@@ -19,6 +20,20 @@ export class JungleController {
     jumbles.forEach(jumble => jumbleContent += jumble.jumbleItemTemplate)
     setHTML('jumble-list', jumbleContent)
   }
+
+
+  drawActiveJumble() {
+    const jumble = AppState.activeJumble
+
+    if (jumble == null) {
+      setHTML('active-jumble', '')
+
+    } else {
+      setHTML('active-jumble', AppState.activeJumble.activeJumbleTemplate)
+    }
+
+  }
+
 
   createJumble() {
     try {
@@ -32,7 +47,9 @@ export class JungleController {
     }
   }
 
-
+  setActiveJumble(jumbleTitle) {
+    jungleService.setActiveJumble(jumbleTitle)
+  }
 
 
 
