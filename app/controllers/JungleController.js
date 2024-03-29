@@ -2,7 +2,14 @@ import { AppState } from "../AppState.js";
 import { Jumble } from "../models/Jungle.js";
 import { jungleService } from "../services/JungleService.js";
 import { getFormData } from "../utils/FormHandler.js";
+import { Pop } from "../utils/Pop.js";
 import { setHTML } from "../utils/Writer.js";
+
+
+function _focusCursorToGameArea() {
+  document.getElementById('gameSubmit').focus()
+}
+
 
 export class JungleController {
 
@@ -12,28 +19,6 @@ export class JungleController {
     AppState.on('activeJumble', this.drawActiveJumble)
     this.drawJumbleList()
   }
-
-
-  drawJumbleList() {
-    const jumbles = AppState.jumbles
-    let jumbleContent = ''
-    jumbles.forEach(jumble => jumbleContent += jumble.jumbleItemTemplate)
-    setHTML('jumble-list', jumbleContent)
-  }
-
-
-  drawActiveJumble() {
-    const jumble = AppState.activeJumble
-
-    if (jumble == null) {
-      setHTML('active-jumble', '')
-
-    } else {
-      setHTML('active-jumble', AppState.activeJumble.activeJumbleTemplate)
-    }
-
-  }
-
 
   createJumble() {
     try {
@@ -47,27 +32,50 @@ export class JungleController {
     }
   }
 
-  setActiveJumble(jumbleTitle) {
-    jungleService.setActiveJumble(jumbleTitle)
-    jungleService.gameStart()
+  drawJumbleList() {
+    const jumbles = AppState.jumbles
+    let jumbleContent = ''
+    jumbles.forEach(jumble => jumbleContent += jumble.jumbleItemTemplate)
+    setHTML('jumble-list', jumbleContent)
+  }
+
+
+  setActiveJumble(jumbleId) {
+    console.log('controller set active', jumbleId);
+    jungleService.setActiveJumble(jumbleId)
+    // jungleService.gameStart()
 
   }
 
 
-  checkGame() {
+  drawActiveJumble() {
+    const jumble = AppState.activeJumble
+    setHTML('active-jumble', AppState.activeJumble.activeJumbleTemplate)
+    _focusCursorToGameArea()
+    // if (jumble == null) {
+    //   setHTML('active-jumble', '')
 
+    // } else {
+    //   setHTML('active-jumble', AppState.activeJumble.activeJumbleTemplate)
+    // }
+
+  }
+
+
+
+
+  checkGame() {
     try {
       event.preventDefault()
       console.log('checking submission')
-      const gameSubmit = event.target
-      const submitData = getFormData(gameSubmit)
-      console.log('submitted', submitData)
-
-
-      submitData.gameSubmit == AppState.activeJumble.body ? console.log('woop') : console.log('lose');
-
+      const form = event.target
+      const submittedJumble = getFormData(form)
+      console.log('submitted', submittedJumble)
+      jungleService.checkGame(submittedJumble)
+      Pop.toast('You Win!', 'success', 'center')
     } catch {
-      console.error('[SUBMIT BROKEN]');
+      Pop.toast('You Got Jumbled!', 'error', 'center')
+
     }
   }
 
